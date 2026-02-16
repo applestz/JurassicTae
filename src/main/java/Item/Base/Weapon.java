@@ -2,6 +2,7 @@ package Item.Base;
 
 import Interfaces.Buyable;
 import Interfaces.Useable;
+import LivingThing.Player;
 
 public class Weapon extends Item implements Useable, Buyable {
     private final int buyPrice;
@@ -14,5 +15,10 @@ public class Weapon extends Item implements Useable, Buyable {
     @Override
     public int getBuyPrice() {
         return buyPrice;
+    }
+
+    @Override
+    public void use(Player player) {
+
     }
 }
