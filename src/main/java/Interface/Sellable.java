@@ -1,5 +1,5 @@
 package Interface;
 
 public interface Sellable {
-    int sellPrice;
+    int getSellPrice();
 }

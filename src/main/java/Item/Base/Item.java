@@ -1,7 +1,7 @@
 package Item.Base;
 
 public class Item {
-    private String name;
+    private final String name;
     private final String imgUrl;
 
     public Item(String name, String imgUrl) {
