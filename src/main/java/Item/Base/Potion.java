@@ -1,10 +1,11 @@
 package Item.Base;
 
-import Interface.Buyable;
-import Interface.Useable;
+import Interfaces.Buyable;
+import Interfaces.Useable;
+import LivingThing.Player;
 
 public abstract class Potion extends Item implements Useable, Buyable {
-    private int buyPrice;
+    private final int buyPrice;
 
     public Potion(String name, String imgUrl, int buyPrice) {
         super(name, imgUrl);
@@ -14,5 +15,10 @@ public abstract class Potion extends Item implements Useable, Buyable {
     @Override
     public int getBuyPrice() {
         return buyPrice;
+    }
+
+    @Override
+    public void use(Player player) {
+
     }
 }

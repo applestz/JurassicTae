@@ -1,10 +1,10 @@
 package Item.Base;
 
-import Interface.Buyable;
-import Interface.Useable;
+import Interfaces.Buyable;
+import Interfaces.Useable;
 
 public class Weapon extends Item implements Useable, Buyable {
-    private int buyPrice;
+    private final int buyPrice;
 
     public Weapon(String name, String imgUrl, int buyPrice) {
         super(name, imgUrl);

@@ -1,9 +1,9 @@
 package Item.Base;
 
-import Interface.Sellable;
+import Interfaces.Sellable;
 
 public class TamedDinosaur extends Item implements Sellable {
-    private int sellPrice;
+    private final int sellPrice;
 
     public TamedDinosaur(String name, String imgUrl, int sellPrice) {
         super(name, imgUrl);

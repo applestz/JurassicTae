@@ -1,6 +1,6 @@
 package Location;
 
-import Interface.Interactable;
+import Interfaces.Interactable;
 
 public abstract class Location implements Interactable {
     private String name;
