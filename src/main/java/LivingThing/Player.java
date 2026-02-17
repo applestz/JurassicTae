@@ -1,10 +1,11 @@
 package LivingThing;
 
+import Interfaces.Moveable;
 import Item.Base.Item;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Moveable {
     //field
     private final String name;
     private int money;
