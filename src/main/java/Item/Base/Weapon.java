@@ -4,12 +4,21 @@ import Interfaces.Buyable;
 import Interfaces.Useable;
 import LivingThing.Player;
 
-public class Weapon extends Item implements Useable, Buyable {
+public abstract class Weapon extends Item implements Useable, Buyable {
+    //field
+    private final int attack;
     private final int buyPrice;
 
-    public Weapon(String name, String imgUrl, int buyPrice) {
+    //constructor
+    public Weapon(String name, String imgUrl, int attack, int buyPrice) {
         super(name, imgUrl);
+        this.attack = attack;
         this.buyPrice = buyPrice;
+    }
+
+    //getter
+    public int getAttack() {
+        return attack;
     }
 
     @Override
@@ -17,8 +26,7 @@ public class Weapon extends Item implements Useable, Buyable {
         return buyPrice;
     }
 
+    //method
     @Override
-    public void use(Player player) {
-
-    }
+    public abstract void use(Player player);
 }
