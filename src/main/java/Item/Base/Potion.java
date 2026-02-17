@@ -22,7 +22,5 @@ public abstract class Potion extends Item implements Useable, Buyable {
 
     //method
     @Override
-    public void use(Player player) {
-
-    }
+    public abstract void use(Player player);
 }
