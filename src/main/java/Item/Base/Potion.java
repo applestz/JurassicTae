@@ -1,18 +1,26 @@
 package Item.Base;
 
-import Interface.Buyable;
-import Interface.Useable;
+import Interfaces.Buyable;
+import Interfaces.Useable;
+import LivingThing.Player;
 
 public abstract class Potion extends Item implements Useable, Buyable {
-    private int buyPrice;
+    //field
+    private final int buyPrice;
 
+    //constructor
     public Potion(String name, String imgUrl, int buyPrice) {
         super(name, imgUrl);
         this.buyPrice = buyPrice;
     }
 
+    //getter
     @Override
     public int getBuyPrice() {
         return buyPrice;
     }
+
+    //method
+    @Override
+    public abstract void use(Player player);
 }
