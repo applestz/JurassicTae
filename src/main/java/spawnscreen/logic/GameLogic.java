@@ -4,7 +4,7 @@ import spawnscreen.LivingThing.Player;
 
 public class GameLogic {
     private static GameLogic instance;
-    private Player player;
+    private Player player = new Player();
     private GameState gameState;
 
     private GameLogic() {
@@ -28,7 +28,4 @@ public class GameLogic {
         }
     }
 
-    public void render(){
-
-    }
 }

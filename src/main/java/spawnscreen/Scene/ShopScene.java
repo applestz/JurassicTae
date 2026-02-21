@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import spawnscreen.Item.Weapon.AnestheticDart;
 
 import java.util.ArrayList;
 
@@ -16,14 +17,14 @@ public class ShopScene extends StackPane {
         //Arrayปลอม
         ArrayList<Item> items = new ArrayList<>();
 
-        items.add(new Item("Trap", "/spawnscreen/trap.png"));
-        items.add(new Item("Trap", "/spawnscreen/trap.png"));
-        items.add(new Item("Trap", "/spawnscreen/trap.png"));
-        items.add(new Item("Trap", "/spawnscreen/trap.png"));
-        items.add(new Item("Trap", "/spawnscreen/trap.png"));
-        items.add(new Item("Trap", "/spawnscreen/trap.png"));
-        items.add(new Item("Trap", "/spawnscreen/trap.png"));
-        items.add(new Item("Trap", "/spawnscreen/trap.png"));
+        items.add(new AnestheticDart());
+        items.add(new AnestheticDart());
+        items.add(new AnestheticDart());
+        items.add(new AnestheticDart());
+        items.add(new AnestheticDart());
+        items.add(new AnestheticDart());
+        items.add(new AnestheticDart());
+        items.add(new AnestheticDart());
 
         this.setPrefSize(600, 400);
         this.setMaxSize(600, 400);

@@ -1,7 +1,11 @@
 package spawnscreen.LivingThing;
 
 import javafx.scene.canvas.Canvas;
+import spawnscreen.Interfaces.Sellable;
 import spawnscreen.Item.Base.Item;
+import spawnscreen.Item.Base.Potion;
+import spawnscreen.Item.Base.TamedDinosaur;
+import spawnscreen.Item.Base.Weapon;
 import spawnscreen.Location.*;
 import spawnscreen.Scene.SellScene;
 import spawnscreen.Scene.SpawnCanvas;
@@ -10,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import spawnscreen.logic.GameController;
 import spawnscreen.logic.GameLogic;
@@ -164,4 +169,32 @@ public class Player {
                 y + HEIGHT > otherY;
     }
 
+
+    public void sortInventory(){
+        ArrayList<Item> items = getInventory();
+        ArrayList<Item> newInventory = new ArrayList<>();
+
+        for(Item item : items){
+            if(item instanceof TamedDinosaur){
+                newInventory.add(item);
+            }
+        }
+        for(Item item : items){
+            if(item instanceof Weapon){
+                newInventory.add(item);
+            }
+        }
+        for(Item item : items){
+            if(item instanceof Potion){
+                newInventory.add(item);
+            }
+        }
+        setInventory(newInventory);
+    }
+
+    public void sellItem(Item item){
+        //(if!(item instanceof Sellable))return;
+        if (item instanceof Sellable)money += ((Sellable) item).getSellPrice();
+        inventory.remove(item);
+    }
 }

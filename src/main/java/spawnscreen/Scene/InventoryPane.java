@@ -1,5 +1,7 @@
 package spawnscreen.Scene;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import spawnscreen.Item.Base.Item;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,10 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import spawnscreen.Item.Base.Potion;
+import spawnscreen.Item.Base.TamedDinosaur;
+import spawnscreen.Item.Base.Weapon;
+import spawnscreen.logic.GameController;
 import spawnscreen.logic.GameLogic;
 import javafx.scene.image.Image;
 
 public class InventoryPane extends StackPane {
+    private GridPane grid;
     public InventoryPane() {
 
         this.setPrefSize(600, 400);
@@ -37,37 +44,12 @@ public class InventoryPane extends StackPane {
         """);
 
         // Grid สำหรับไอเท็ม
-        GridPane grid = new GridPane();
+        grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setAlignment(Pos.TOP_CENTER);
 
-        int col = 0;
-        int row = 0;
-
-        for (Item item : GameLogic.getInstance().getPlayer().getInventory()) {
-
-            Pane pane = new Pane();
-            pane.setPrefSize(100,100);
-            Image img = new Image(getClass().getResource(item.getImgUrl()).toExternalForm());
-            BackgroundSize size = new BackgroundSize(100,100,false,false,false,false);
-            pane.setBackground(new Background(
-                    new BackgroundImage(
-                            img,
-                            BackgroundRepeat.NO_REPEAT,
-                            BackgroundRepeat.NO_REPEAT,
-                            BackgroundPosition.CENTER,
-                            size
-                    )
-            ));
-            grid.add(pane, col, row);
-
-            col++;
-            if (col == 4) {   // 4 ช่องต่อแถว
-                col = 0;
-                row++;
-            }
-        }
+        loadItems();
 
         // ScrollPane ครอบ grid
         ScrollPane scrollPane = new ScrollPane(grid);
@@ -95,5 +77,89 @@ public class InventoryPane extends StackPane {
 
 
         this.getChildren().addAll(box,exitBtn);
+    }
+
+    public void loadItems() {
+        grid.getChildren().clear();
+
+        int col = 0;
+        int row = 0;
+
+        for (Item item : GameLogic.getInstance().getPlayer().getInventory()) {
+
+            VBox cell = new VBox(5);
+            cell.setPrefSize(120, 120);
+            cell.setAlignment(Pos.CENTER);
+
+            // 🎨 พื้นหลังเทาอ่อน
+            cell.setStyle("""
+                    -fx-background-color: #3a3a3a;
+                    -fx-background-radius: 12;
+                    -fx-border-color: #555;
+                    -fx-border-radius: 12;
+                    """);
+
+            // 🖼 รูปภาพ
+            Image img = item.getImage();
+
+            ImageView imageView = new ImageView(img);
+            imageView.setFitWidth(70);
+            imageView.setFitHeight(70);
+            imageView.setPreserveRatio(true);
+
+            // 🏷 ชื่อ item
+            Label nameLabel = new Label(item.getName());
+            nameLabel.setStyle("""
+                    -fx-text-fill: white;
+                    -fx-font-size: 12px;
+                    -fx-font-weight: bold;
+                    """);
+
+            if (item instanceof Weapon) {
+                nameLabel.setBackground(new Background(
+                        new BackgroundFill(
+                                Color.RED,
+                                new CornerRadii(5),
+                                Insets.EMPTY
+                        )
+                ));
+            } else if (item instanceof Potion) {
+                nameLabel.setBackground(new Background(
+                        new BackgroundFill(
+                                Color.YELLOW,
+                                new CornerRadii(5),
+                                Insets.EMPTY
+                        )
+                ));
+                nameLabel.setStyle("""
+                        -fx-text-fill: black;
+                        -fx-font-size: 12px;
+                        -fx-font-weight: bold;
+                        """);
+            } else if (item instanceof TamedDinosaur) {
+                nameLabel.setBackground(new Background(
+                        new BackgroundFill(
+                                Color.GREEN,
+                                new CornerRadii(5),
+                                Insets.EMPTY
+                        )
+                ));
+                nameLabel.setStyle("""
+                        -fx-text-fill: black;
+                        -fx-font-size: 12px;
+                        -fx-font-weight: bold;
+                        """);
+            }
+
+            cell.getChildren().addAll(imageView, nameLabel);
+
+            grid.add(cell, col, row);
+
+            col++;
+            if (col == 4) {
+                col = 0;
+                row++;
+            }
+        }
     }
 }

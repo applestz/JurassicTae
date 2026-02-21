@@ -5,6 +5,8 @@ import gym_minigame.MainMenu;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import spawnscreen.LivingThing.Player;
+import spawnscreen.Scene.SellScene;
 import spawnscreen.Scene.SpawnScreen;
 
 public class GameController {
@@ -14,6 +16,7 @@ public class GameController {
     private Stage stage;
     private Scene mainScene;
     private SpawnScreen root;
+    private Player player;
 
     private KeyboardController keyboard;
     private boolean gameEnded;
@@ -25,7 +28,7 @@ public class GameController {
     }
     private int lastGymScore = 0;
 
-    // 🔥 NEW init
+
     public void init(Stage stage, Scene scene){
         this.stage = stage;
         this.mainScene = scene;
@@ -96,6 +99,7 @@ public class GameController {
 
     public void setRoot(SpawnScreen spawnScreen){
         this.root = spawnScreen;
+        player = root.getSpawnCanvas().getPlayer();
     }
 
     public SpawnScreen getRoot(){
@@ -108,5 +112,17 @@ public class GameController {
 
     public boolean isGameEnded(){
         return gameEnded;
+    }
+
+    public Player getPlayer(){
+        return player;
+    }
+
+    public void reloadSellScene(){
+        root.getSellScene().refresh();
+    }
+
+    public void reloadMoney(){
+        root.getMoneyLabel().setText("Money : " + GameLogic.getInstance().getPlayer().getMoney() + " $");
     }
 }

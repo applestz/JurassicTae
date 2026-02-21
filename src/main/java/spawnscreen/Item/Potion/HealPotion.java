@@ -1,9 +1,16 @@
 package spawnscreen.Item.Potion;
 
+import javafx.scene.image.Image;
 import spawnscreen.Item.Base.Potion;
 
-public class HealPotion extends Potion {
-    public HealPotion(String name,String url,int price){
-       super(name,url,price);
-    };
+public  class HealPotion extends Potion {
+    private Image image;
+    public HealPotion(){
+        super("Heal Potion","/trap.png",20);
+        image = new Image(getClass().getResource(getImgUrl()).toExternalForm());
+    }
+
+    public Image getImage(){
+        return  image;
+    }
 }

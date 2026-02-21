@@ -1,5 +1,10 @@
 package spawnscreen.Scene;
 
+import spawnscreen.Item.Base.Item;
+import spawnscreen.Item.Potion.SpeedPotion;
+import spawnscreen.Item.Weapon.AnestheticDart;
+import spawnscreen.Item.Weapon.ElectricGun;
+import spawnscreen.Item.Weapon.Noose;
 import spawnscreen.LivingThing.Player;
 import spawnscreen.Location.*;
 import javafx.animation.AnimationTimer;
@@ -10,9 +15,11 @@ import spawnscreen.logic.*;
 import spawnscreen.logic.GameController;
 import spawnscreen.logic.KeyboardController;
 
+import java.util.ArrayList;
+
 public class SpawnCanvas extends Canvas {
     private GraphicsContext gc ;
-    private Player player;
+    private Player player = GameLogic.getInstance().getPlayer();
     private Shop shop;
     private Zoo zoo;
     private Ufo ufo;
@@ -36,7 +43,15 @@ public class SpawnCanvas extends Canvas {
         gymImg = gym.getImage();
         ufoImg = ufo.getImage();
 
-        player = new Player();
+        //*********************************************fake Inventory
+        ArrayList<Item> items = new ArrayList<>();
+        for(int i = 0;i<5;i++){
+            items.add(new AnestheticDart());
+            items.add(new SpeedPotion());
+            items.add(new Noose());
+        }
+        player.setInventory(items);
+        //***********************************************
 
         startGameLoop();   // ✅ ต้องเรียก
     }

@@ -1,10 +1,11 @@
 package spawnscreen.Item.Base;
 
+import javafx.scene.image.Image;
 import spawnscreen.Interfaces.Buyable;
 import spawnscreen.Interfaces.Useable;
 import spawnscreen.LivingThing.Player;
 
-public class Weapon extends Item implements Useable, Buyable {
+public abstract class Weapon extends Item implements Useable, Buyable {
     private final int buyPrice;
 
     public Weapon(String name, String imgUrl, int buyPrice) {
@@ -19,6 +20,7 @@ public class Weapon extends Item implements Useable, Buyable {
 
     @Override
     public void use(Player player) {
-
     }
+
+    public abstract Image getImage();
 }

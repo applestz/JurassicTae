@@ -1,6 +1,10 @@
 package spawnscreen.Item.Base;
 
-public class Item {
+import javafx.scene.image.Image;
+
+import java.awt.*;
+
+public abstract class Item {
     //field
     private final String name;
     private final String imgUrl;
@@ -18,4 +22,6 @@ public class Item {
     public String getImgUrl() {
         return imgUrl;
     }
+
+    public abstract Image getImage();
 }
