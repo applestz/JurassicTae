@@ -1,7 +1,10 @@
 package spawnscreen.LivingThing;
 
+import javafx.scene.canvas.Canvas;
 import spawnscreen.Item.Base.Item;
+import spawnscreen.Location.*;
 import spawnscreen.Scene.SellScene;
+import spawnscreen.Scene.SpawnCanvas;
 import spawnscreen.Scene.SpawnScreen;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -9,6 +12,8 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 import spawnscreen.logic.GameController;
+import spawnscreen.logic.GameLogic;
+import spawnscreen.logic.KeyboardController;
 
 public class Player {
     //field
@@ -121,17 +126,29 @@ public class Player {
         if (y > 800 - HEIGHT) y = 800 - HEIGHT;
 
         SpawnScreen spawnScreen = GameController.getInstance().getRoot();
-        if(intersects(80,75,250,500)){
+        SpawnCanvas spawnCanvas = GameController.getInstance().getRoot().getSpawnCanvas();
+        Shop shop = spawnCanvas.getShop();
+        Zoo zoo = spawnCanvas.getZoo();
+        Ufo ufo = spawnCanvas.getUfo();
+        Gym gym = spawnCanvas.getGym();
+
+        KeyboardController keyboard = GameController.getInstance().getKeyboard();
+
+        if (isNear(shop) && keyboard.isFPressed()) {
             spawnScreen.showShopScene();
-        }else if(intersects(800,75,250,500)){
-            spawnScreen.setSellScene(new SellScene());
+        }else if(isNear(zoo) && keyboard.isFPressed()){
             spawnScreen.showSellScene();
-        }else if(intersects(80,450,250,500)){
-            // MiniGame Start
-        }else if(intersects(800,450,250,500)){
-            // go to dinosour world
         }
 
+    }
+
+    public boolean isNear(Location location){
+         return intersects(
+                location.getxPos(),
+                location.getyPos(),
+                location.getHeight(),
+                location.getWidth()
+        );
     }
 
     public void render(GraphicsContext gc) {

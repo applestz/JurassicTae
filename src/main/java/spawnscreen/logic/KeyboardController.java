@@ -10,6 +10,7 @@ public class KeyboardController {
     private boolean leftPressed;
     private boolean rightPressed;
     private boolean pPressed;
+    private boolean fPressed;
 
     public KeyboardController(Scene scene) {
         keyboardSetup(scene);
@@ -23,6 +24,7 @@ public class KeyboardController {
             if (e.getCode() == KeyCode.A) leftPressed = true;
             if (e.getCode() == KeyCode.D) rightPressed = true;
             if (e.getCode() == KeyCode.P) pPressed = true;
+            if (e.getCode() == KeyCode.F) fPressed = true;
         });
 
         scene.setOnKeyReleased(e -> {
@@ -31,6 +33,7 @@ public class KeyboardController {
             if (e.getCode() == KeyCode.A) leftPressed = false;
             if (e.getCode() == KeyCode.D) rightPressed = false;
             if (e.getCode() == KeyCode.P) pPressed = false;
+            if (e.getCode() == KeyCode.F) fPressed = false;
         });
     }
 
@@ -39,4 +42,7 @@ public class KeyboardController {
     public boolean isLeftPressed() { return leftPressed; }
     public boolean isRightPressed() { return rightPressed; }
     public boolean isPPressed() { return pPressed; }
+    public boolean isFPressed(){
+        return fPressed;
+    }
 }

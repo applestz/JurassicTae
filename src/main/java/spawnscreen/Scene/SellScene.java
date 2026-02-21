@@ -66,7 +66,8 @@ public class SellScene extends StackPane {
             }
         }
 
-        shopBox.getChildren().addAll(title, gridPane);
+        shopBox.getChildren().add(gridPane);
+
 
         // 🔴 Exit Button
         Button exitBtn = new Button("X");
@@ -81,7 +82,10 @@ public class SellScene extends StackPane {
         StackPane.setAlignment(exitBtn, Pos.TOP_RIGHT);
         StackPane.setMargin(exitBtn, new Insets(10));
 
-        this.getChildren().addAll(shopBox, exitBtn);
+        StackPane.setAlignment(title, Pos.TOP_CENTER);
+        StackPane.setMargin(title, new Insets(20, 0, 0, 0));
+
+        this.getChildren().addAll(shopBox, title, exitBtn);
 
     }
 }
