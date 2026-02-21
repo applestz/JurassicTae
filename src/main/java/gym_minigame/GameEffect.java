@@ -6,7 +6,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GameEffect {
+
+    // 🔥 Image cache (โหลดครั้งเดียวต่อ resource)
+    private static final Map<String, Image> IMAGE_CACHE = new HashMap<>();
 
     private final Image effectImage;
     private final double size;
@@ -16,9 +22,15 @@ public class GameEffect {
         this.size = size;
         this.durationSeconds = durationSeconds;
 
-        this.effectImage = new Image(
-                getClass().getResourceAsStream(resourcePath)
-        );
+        // โหลดครั้งเดียว ถ้ามีแล้วใช้ของเดิม
+        if (!IMAGE_CACHE.containsKey(resourcePath)) {
+            IMAGE_CACHE.put(
+                    resourcePath,
+                    new Image(GameEffect.class.getResourceAsStream(resourcePath))
+            );
+        }
+
+        this.effectImage = IMAGE_CACHE.get(resourcePath);
     }
 
     public void playRandomNoLane(
@@ -50,10 +62,8 @@ public class GameEffect {
 
         root.getChildren().add(effectView);
 
-        javafx.animation.PauseTransition delay =
-                new javafx.animation.PauseTransition(
-                        javafx.util.Duration.seconds(3)
-                );
+        PauseTransition delay =
+                new PauseTransition(Duration.seconds(durationSeconds));
 
         delay.setOnFinished(e -> root.getChildren().remove(effectView));
         delay.play();
