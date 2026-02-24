@@ -18,9 +18,6 @@ import gamemode.lobby.logic.GameController;
 
 public class Player {
     //field
-    private double x, y;
-    private final double WIDTH = 60;
-    private final double HEIGHT = 60;
     private final String name;
     private int money;
     private int hp;
@@ -29,6 +26,10 @@ public class Player {
     private int level;
     private ArrayList<Item> inventory;
     private double speed = 2;
+
+    private double x, y;
+    private final double WIDTH = 60;
+    private final double HEIGHT = 60;
     private final Image playerImage = new Image(getClass().getResource("/gamemode/lobby/person.png").toExternalForm());
 
     //constructor
@@ -193,5 +194,4 @@ public class Player {
         money -= ((Buyable) item).getBuyPrice();
         inventory.add(item);
     }
-
 }

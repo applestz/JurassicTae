@@ -1,11 +1,13 @@
-package gamemode.forest.fightscene;
+package gamemode.fightscene;
 
 import gamemode.forest.entity.Dinosaur;
+import gamemode.lobby.Player.Player;
 
 public class BattleController {
 
     private final BattleView view;
     private final Dinosaur enemy;
+    private boolean battleEnded = false;
 
     public BattleController(CommandBox commandBox, BattleView view, Dinosaur enemy) {
         this.view = view;
@@ -35,8 +37,10 @@ public class BattleController {
                 commandBox.setMessage("Attempting capture...")
         );
 
-        commandBox.getEscapeButton().setOnAction(e ->
-                commandBox.setMessage("Trying to escape...")
-        );
+        commandBox.getEscapeButton().setOnAction(e -> {
+            if (battleEnded) return;
+            battleEnded = true;
+            view.onEscape();
+        });
     }
 }

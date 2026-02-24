@@ -1,6 +1,7 @@
-package gamemode.forest.fightscene;
+package gamemode.fightscene;
 
 import gamemode.forest.entity.Dinosaur;
+import gamemode.lobby.Player.Player;
 import gamemode.lobby.logic.GameController;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -76,4 +77,6 @@ public class BattleView extends BorderPane {
     public void onEnemyDefeated() {
         controller.onEnemyDefeated(enemy);
     }
+
+    public void onEscape() {controller.returnToWorld();}
 }
